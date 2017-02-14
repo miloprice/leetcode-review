@@ -1,5 +1,6 @@
 # @param {Integer} n
 # @return {String}
+# Faster than 53.33% of submissions
 def count_and_say(n)
     if n == 1
         '1'
@@ -8,8 +9,7 @@ def count_and_say(n)
         cur_char = nil
         cur_count = 0
         cur_val = ""
-        (0...prev_val.length).each do |i|
-            new_char = prev_val[i]
+        prev_val.each_char.each do |new_char|
             if cur_char && new_char != cur_char
                 cur_val << cur_count.to_s + cur_char
                 cur_char = new_char

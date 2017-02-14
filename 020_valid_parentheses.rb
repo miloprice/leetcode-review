@@ -4,8 +4,7 @@ def is_valid(s)
     paren_stack = []
     left_parens = Set.new(['(', '{', '['])
 
-    (0...s.length).each do |i|
-        char = s[i]
+    s.each_char do |char|
         if left_parens.include? char
             paren_stack << char
         elsif char == ')'
