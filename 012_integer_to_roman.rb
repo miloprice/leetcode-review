@@ -1,33 +1,35 @@
 VALUES = {
-    1    => 'I',
-    5    => 'V',
-    10   => 'X',
-    50   => 'L',
-    100  => 'C',
-    500  => 'D',
-    1000 => 'M'
-}
+  1  => 'I',
+  5  => 'V',
+  10   => 'X',
+  50   => 'L',
+  100  => 'C',
+  500  => 'D',
+  1000 => 'M'
+}.freeze
 
 # @param {Integer} num
 # @return {String}
 def int_to_roman(num)
-    result = ''
-    radix = 1
-    while num > 0
-        place = num % 10
-        if (place_val = VALUES[radix * place])
-            result.prepend place_val
-        elsif place > 0 && (plus_one_val = VALUES[(place + 1) * radix])
-            result.prepend VALUES[radix] + plus_one_val
-        elsif place > 5 && (place_five = VALUES[radix * 5])
-            result.prepend place_five + (VALUES[radix] * (place - 5))
-        else
-            result.prepend VALUES[radix] * place
-        end
-        radix *= 10
-        num /= 10
+  result = ''
+  radix = 1
+
+  while num > 0
+    place = num % 10
+    if (place_val = VALUES[radix * place])
+      result.prepend place_val
+    elsif place > 0 && (plus_one_val = VALUES[(place + 1) * radix])
+      result.prepend VALUES[radix] + plus_one_val
+    elsif place > 5 && (place_five = VALUES[radix * 5])
+      result.prepend place_five + (VALUES[radix] * (place - 5))
+    else
+      result.prepend VALUES[radix] * place
     end
-    result
+    radix *= 10
+    num /= 10
+  end
+
+  result
 end
 
 p int_to_roman(0) == ''
